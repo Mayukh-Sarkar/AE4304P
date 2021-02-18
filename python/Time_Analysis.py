@@ -43,7 +43,7 @@ ay =  V*(xt[:,1] +xt[:,0])
 
 
 y1r = cnt.lsim(system_reduced, u1, t)
-t,y2r,x2r = sc.signal.lsim(A_r,B_r,C_r,D_r, u2, t)
+t,y2r,x2r = sc.signal.lsim(system_reduced, u2, t)
 t,y3r,x3r = sc.signal.lsim(system_reduced, u3, t)
 
 plt.plot(t,y1r[:,0])
