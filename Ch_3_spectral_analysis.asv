@@ -74,7 +74,6 @@ axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\phi PSD_c')
 subplot(2,1,2); loglog(w,Sxx(:,3),'--',omega,pbv_psd_c(1:N/2));
 axis(10.^[-2 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('pb/V PSD_c')
 
-figure(3)
 subplot(2,1,1); loglog(w,Sxx(:,4),'--',omega,rbv_psd_c(1:N/2));
 axis(10.^[-2 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V PSD_c')
 subplot(2,1,2); loglog(w,Sxx_r(:,2),'--',omega,rbv_psd_r(1:N/2));

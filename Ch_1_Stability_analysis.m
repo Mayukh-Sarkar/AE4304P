@@ -98,7 +98,7 @@ bag2 = (1-tau6*(tau4+tau5)/(tau4*tau5))*sqrt(Iag0*(V/Lg)^3)/(tau4*tau5);
 bbg1 = sigmabg*sqrt(3*V/Lg);
 bbg2 = (1-2*sqrt(3))*sigmabg*sqrt((V/Lg)^3);
 
-% STATE- AND INPUT MATRICES
+
 A = [yb yphi yp    yr 0    0    0    0    ybg  0;
      0  0    2*V/b 0  0    0    0    0    0    0;
      lb 0    lp    lr lug  0    lag  0    lbg  0;
@@ -123,30 +123,12 @@ B = [0   ydr 0    0    0;
  C = eye(10,10);
  D = zeros(10,5);
 
-% SHOW EIGENVALUES OF THE UNCONTROLLED SYSTEM
 eig(A)
 sys_uncontrolled = ss(A,B,C,D);
 figure(1)
 pzmap(sys_uncontrolled)
 grid on
 
-
-% check for yourself that the spiral mode is not stable, the
-% corresponding pole lies in the right-half plane (s = 0.0764).
-
-% THE CESSNA CITATION CE-500 IS NOT STABLE IN SPIRAL MODE (FOR THE cit2a.m 
-% FLIGHT CONDITION), HENCE THE FEEDBACK CONTROLLER TO THE AILERON FOR PHI IS 
-% USED AS IN : 
-%
-%   delta_a = K_phi*phi     :  (K_phi for THIS flight condition)
-%
-% THEREFORE, CONTROLLED AIRCRAFT SYSTEM MATRICES WILL BE USED FOR RESULTS;
-%
-%      A = At 
-%
-% NO ALTERATIONS MADE FOR cit1a.m !
-
-% NOTE: SPIRAL MODE IS JUST STABLE WITH K_phi ENTERED BELOW
 Ar = [0   -2*V/b 0    0    0    0    0  0;
      nb    nr nug  0    nag  0    nbg  0;
      0     0  0    1    0    0    0    0;
@@ -166,19 +148,15 @@ Br = [0  0   0    0    0;
      0   0   0    0    bbg2];
 Cr = eye (8,8);
 Dr = zeros(8,5); 
-
-% SHOW EIGENVALUES OF THIS CONTROLLED SYSTEM
 eig(Ar)
 sys_reduced_c = ss(Ar,Br,Cr,Dr);
 figure(2)
 pzmap(sys_reduced_c)
 grid on
-
-% FOR EFFECT OF K_phi ON AIRCRAFT RESPONSES, ONE OTHER K_phi IS USED
 Kphi = -0.2;
 K    = [0 Kphi 0 0  0 0  0 0  0 0];
 A2   = A-B(:,1)*K;
-% SHOW EIGENVALUES OF THIS CONTROLLED SYSTEM
+
 eig(A2)
 sys_controlled = ss(A2,B,C,D);
 figure(3)
