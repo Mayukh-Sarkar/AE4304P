@@ -20,12 +20,12 @@
 % 
 % Data for Cessna Citation Ce-500, landing (1)
 
-% AIRCRAFT- AND FLIGHT CONDITION 'LANDING'.
-V   = 59.9;
+% AIRCRAFT- AND FLIGHT CONDITION 'cruise'.
+V   = 121.3;
 S   = 24.2;
 b   = 13.36;
-mub = 15.5;
-KX2 = 0.012;
+mub = 32;
+KX2 = 0.013;
 KZ2 = 0.037;
 KXZ = 0.002;
 CL  = 1.1360;
@@ -45,11 +45,11 @@ tau1 = 0.0991;     tau2 = 0.5545;     tau3 = 0.4159;
 tau4 = 0.0600;     tau5 = 0.3294;     tau6 = 0.2243;
 
 % AIRCRAFT ASYMMETRIC AERODYNAMIC DERIVATIVES 
-CYb  =-0.9896;     Clb  =-0.0772;     Cnb  = 0.1638;
-CYp  =-0.0870;     Clp  =-0.3444;     Cnp  =-0.0108;
-CYr  = 0.4300;     Clr  = 0.2800;     Cnr  =-0.1930;
-CYda = 0.0000;     Clda =-0.2349;     Cnda = 0.0286;
-CYdr = 0.3037;     Cldr = 0.0286;     Cndr =-0.1261;
+CYb  =-1.3250;     Clb  =-0.1070;     Cnb  = 0.1835;
+CYp  =-0.1320;     Clp  =-0.3684;     Cnp  =-0.0035;
+CYr  = 0.4300;     Clr  = 0.1750;     Cnr  =-0.1930;
+CYda = 0.0000;     Clda =-0.2292;     Cnda = 0.0071;
+CYdr = 0.3037;     Cldr = 0.0446;     Cndr =-0.1261;
  
                    Clpw = 0.8*Clp;    Cnpw = 0.9*Cnp;
                    Clrw = 0.7*Clr;    Cnrw = 0.2*Cnr;
@@ -123,7 +123,7 @@ B = [0   ydr 0    0    0;
  C = eye(10,10);
  D = zeros(10,5);
 
-eig(A)
+eig_A = eig(A)
 sys_uncontrolled = ss(A,B,C,D);
 figure(1)
 pzmap(sys_uncontrolled)
@@ -148,7 +148,7 @@ Br = [0  0   0    0    0;
      0   0   0    0    bbg2];
 Cr = eye (8,8);
 Dr = zeros(8,5); 
-eig(Ar)
+eig_Ar = eig(Ar)
 sys_reduced_c = ss(Ar,Br,Cr,Dr);
 figure(2)
 pzmap(sys_reduced_c)
@@ -157,8 +157,9 @@ Kphi = -0.2;
 K    = [0 Kphi 0 0  0 0  0 0  0 0];
 A2   = A-B(:,1)*K;
 
-eig(A2)
+eig_A2 = eig(A2)
 sys_controlled = ss(A2,B,C,D);
 figure(3)
 pzmap(sys_controlled)
 grid on
+
