@@ -69,6 +69,10 @@ pPbv_c     = pwelch(pbV_c);
 pRbv_c     = pwelch(rbV_c);
 pay_c = pwelch(a_y);
 
+pBETA_r  = pwelch(beta_r);
+pRbv_r     = pwelch(rbV_r);
+pay_r = pwelch(a_y_r);
+
 %  PSD ESTIMATE
 % pbeta_psd_c  = ( pBETA_c.*conj(pBETA_c));
 % pphi_psd_c  = (  pPhi_c.*conj(pPhi_c));
@@ -78,8 +82,8 @@ pay_c = pwelch(a_y);
 figure(1)
 subplot(2,1,1); loglog(w,Sxx(:,1),'--',omega,beta_psd_c (1:N/2),'-',omega(1:257),pBETA_c) 
 axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\beta PSD_c');
-% subplot(2,1,2); loglog(w,Sxx_r(:,1),'--',omega,beta_psd_r(1:N/2),beta_r(1:N/2))
-% axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\beta PSD_c')
+subplot(2,1,2); loglog(w,Sxx_r(:,1),'--',omega,beta_psd_r(1:N/2),'-',omega(1:257),pBETA_r)
+axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\beta PSD_c')
 
 % figure(2)
 % subplot(2,1,1); loglog(w,Sxx(:,2),'--',omega,phi_psd_c(1:N/2));
