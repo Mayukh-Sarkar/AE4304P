@@ -4,11 +4,11 @@ w = logspace(-2,2,300);
 % controlled model
 temp = bode(A2,B,C(1,:),D(1,:),5,w); Sbeta_c  = temp.*temp;
 temp = bode(A2,B,C(2,:),D(2,:),5,w); Sphi_c   = temp.*temp;
-temp = bode(A2,B,C(3,:),D(3,:),5,w); Spp_c    = temp.*temp;
+temp = bode(A2,B,C(3,:),D(3,:),5,w); Sbp_c    = temp.*temp;
 temp = bode(A2,B,C(4,:),D(4,:),5,w); Srb_c    = temp.*temp;
 temp = bode(A2,B,V*(A2(1,:)+[0 0 0 2*V/b 0    0    0    0    0  0]),V*B(1,:),4,w); Say_c = temp.*temp;
 
-Sxx  = [Sbeta_c Sphi_c Spp_c Srb_c Say_c];
+Sxx  = [Sbeta_c Sphi_c Sbp_c Srb_c Say_c];
 
 %reduced model
 temp = bode(Ar,Br,Cr(1,:),Dr(1,:),5,w); Sbeta_r  = temp.*temp;
@@ -56,9 +56,7 @@ rbv_psd_r= (1/T)*(    Rbv_r.*conj(Rbv_r));
 ay_psd_r = (1/T)*(    ay_r.*conj(ay_r));
 
 
-Periodograms = [beta_psd_c phi_psd_c pbv_psd_c rbv_psd_c ay_psd_c];
-Periodograms_r = [beta_psd_r rbv_psd_r ay_psd_r];
-% DEFINE FREQUENCY VECTOR
+% DEFINE FREQUENCY VECT
 fs = 1/dt;     % sample frequency
 omega = 2*pi*fs*(0:(N/2)-1)/N;
 %% using pwelch
@@ -73,27 +71,40 @@ pBETA_r  = pwelch(beta_r);
 pRbv_r     = pwelch(rbV_r);
 pay_r = pwelch(a_y_r);
 
-%  PSD ESTIMATE
-% pbeta_psd_c  = ( pBETA_c.*conj(pBETA_c));
-% pphi_psd_c  = (  pPhi_c.*conj(pPhi_c));
-% ppbv_psd_c     = (    pPbv_c.*conj(pPbv_c));
-% prbv_psd_c= (    pRbv_c.*conj(pRbv_c));
-% pay_psd_c = (    pay_c.*conj(pay_c));
+ %PSD ESTIMATE
+pbeta_psd_c  = ( pBETA_c.*conj(pBETA_c));
+pphi_psd_c  = (  pPhi_c.*conj(pPhi_c));
+ppbv_psd_c     = (    pPbv_c.*conj(pPbv_c));
+prbv_psd_c= (    pRbv_c.*conj(pRbv_c));
+pay_psd_c = (    pay_c.*conj(pay_c));
 figure(1)
 subplot(2,1,1); loglog(w,Sxx(:,1),'--',omega,beta_psd_c (1:N/2),'-',omega(1:257),pBETA_c) 
-axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\beta PSD_c');
+axis(10.^[-1 2 -12 -1]); xlabel('omega [rad/s]'); ylabel('\beta_c PSD');
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 subplot(2,1,2); loglog(w,Sxx_r(:,1),'--',omega,beta_psd_r(1:N/2),'-',omega(1:257),pBETA_r)
-axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\beta PSD_c')
+axis(10.^[-1 2 -12 -1]); xlabel('omega [rad/s]'); ylabel('\beta_r PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 
-% figure(2)
-% subplot(2,1,1); loglog(w,Sxx(:,2),'--',omega,phi_psd_c(1:N/2));
-% axis(10.^[-2 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\phi PSD_c')
-% subplot(2,1,2); loglog(w,Sxx(:,3),'--',omega,pbv_psd_c(1:N/2));
-% axis(10.^[-2 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('pb/V PSD_c')
-% 
-% figure(3)
-% subplot(2,1,1); loglog(w,Sxx(:,4),'--',omega,rbv_psd_c(1:N/2));
-% axis(10.^[-2 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V PSD_c')
-% subplot(2,1,2); loglog(w,Sxx_r(:,2),'--',omega,rbv_psd_r(1:N/2));
-% axis(10.^[-2 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V PSD_r')
-% 
+figure(2)
+subplot(2,1,1); loglog(w,Sxx(:,2),'--',omega,phi_psd_c(1:N/2),'-',omega(1:257),pPhi_c);
+axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('\phi_c PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+subplot(2,1,2); loglog(w,Sxx(:,3),'--',omega,pbv_psd_c(1:N/2),'-',omega(1:257),pPbv_c);
+axis(10.^[-1 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('pb/V_c PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+
+figure(3)
+subplot(2,1,1); loglog(w,Sxx(:,4),'--',omega,rbv_psd_c(1:N/2),'-',omega(1:257),pRbv_c);
+axis(10.^[-1 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V_c PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+subplot(2,1,2); loglog(w,Sxx_r(:,2),'--',omega,rbv_psd_r(1:N/2),'-',omega(1:257),pRbv_r);
+axis(10.^[-1 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V_r PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+
+figure(4)
+subplot(2,1,1); loglog(w,Sxx(:,4),'--',omega,ay_psd_c(1:N/2),'-',omega(1:257),pay_c);
+axis(10.^[-1 2 -10 3]); xlabel('omega [rad/s]'); ylabel('ay_c PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+subplot(2,1,2); loglog(w,Sxx_r(:,2),'--',omega,ay_psd_r(1:N/2),'-',omega(1:257),pay_r);
+axis(10.^[-1 2 -10 3]); xlabel('omega [rad/s]'); ylabel('ay_r PSD')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
