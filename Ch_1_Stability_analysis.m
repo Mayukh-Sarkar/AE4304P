@@ -149,9 +149,9 @@ Br = [0  0   0    0    0;
 Cr = eye (8,8);
 Dr = zeros(8,5); 
 eig_Ar = eig(Ar)
-sys_reduced_c = ss(Ar,Br,Cr,Dr);
+sys_reduced = ss(Ar,Br,Cr,Dr);
 figure(2)
-pzmap(sys_reduced_c)
+pzmap(sys_reduced)
 grid on
 Kphi = -0.2;
 K    = [0 Kphi 0 0  0 0  0 0  0 0];
