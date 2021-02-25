@@ -78,16 +78,15 @@ xlabel('Time (s)')
 ylabel('pb/2V (rad/s)')
 grid on
 figure(4)
-subplot(2,1,1)
 plot(t,a_y,'g','LineWidth',1)
 xlabel('Time (s) ')
 ylabel('a_y_c (m/s)')
 grid on
-subplot(2,1,2); 
-plot(t,a_y_r,'b','LineWidth',1)
-xlabel('Time (s)')
-ylabel('a_y_r (m/s)')
-grid on
+% subplot(2,1,2); 
+% plot(t,a_y_r,'b','LineWidth',1)
+% xlabel('Time (s)')
+% ylabel('a_y_r (m/s)')
+% grid on
 figure(5)
 subplot(2,1,1);
 plot(t,yt,'g','LineWidth',1)

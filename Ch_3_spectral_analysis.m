@@ -13,9 +13,9 @@ Sxx  = [Sbeta_c Sphi_c Sbp_c Srb_c Say_c];
 %reduced model
 temp = bode(Ar,Br,Cr(1,:),Dr(1,:),5,w); Sbeta_r  = temp.*temp;
 temp = temp + bode(Ar,Br,Cr(2,:),Dr(2,:),5,w); Srb_r    = temp.*temp;
-temp = bode(Ar,Br,V*(Ar(1,:)+[0 2*V/b 0    0    0    0    0  0]),V*Br(1,:),5,w);Say_r = temp.*temp;
+%temp = bode(Ar,Br,V*(Ar(1,:)+[0 2*V/b 0    0    0    0    0  0]),V*Br(1,:),5,w);Say_r = temp.*temp;
 
-Sxx_r = [Sbeta_r,Srb_r,Say_r];
+Sxx_r = [Sbeta_r,Srb_r];
 
 
 
@@ -91,7 +91,8 @@ axis(10.^[-1 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('pb/V_c PSD')
 legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 
 figure(3)
-subplot(2,1,1); loglog(w,Sxx(:,4),'--',omega,rbv_psd_c(1:N/2),'-',omega(1:4097),pRbv_c);
+subplot(2,1,1)
+loglog(w,Sxx(:,4),'--',omega,rbv_psd_c(1:N/2),'-',omega(1:4097),pRbv_c);
 axis(10.^[-1 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V_c PSD')
 legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 subplot(2,1,2); loglog(w,Sxx_r(:,2),'--',omega,rbv_psd_r(1:N/2),'-',omega(1:4097),pRbv_r);
@@ -99,11 +100,10 @@ axis(10.^[-1 2 -14 -2]); xlabel('omega [rad/s]'); ylabel('rb/V_r PSD')
 legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 
 figure(4)
-subplot(2,1,1)
 loglog(w,Sxx(:,5),'--',omega,ay_psd_c(1:N/2),'-',omega(1:4097),pay_c);
 axis(10.^[-1 2 -10 4]); xlabel('omega [rad/s]'); ylabel('ay_c PSD')
 legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
-subplot(2,1,2); 
-(loglog(w,Sxx_r(:,3),'--',omega,ay_psd_r(1:N/2),'-',omega(1:4097),pay_c));
-axis(10.^[-1 2 -10 4]); xlabel('omega [rad/s]'); ylabel('ay_r PSD')
-legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+% subplot(2,1,2); 
+% (loglog(w,Sxx_r(:,3),'--',omega,ay_psd_r(1:N/2),'-',omega(1:4097),pay_c));
+% axis(10.^[-1 2 -10 4]); xlabel('omega [rad/s]'); ylabel('ay_r PSD')
+% legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
