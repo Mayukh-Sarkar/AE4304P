@@ -58,7 +58,7 @@ fs = 1/dt;     % sample frequency
 omega = 2*pi*fs*(0:(N/2)-1)/N;
 %% using pwelch
 
-[pBETA_c f]  = pwelch(beta_c,omega,[],N,fs);
+pBETA_c  = pwelch(beta_c,omega,[],N,fs);
 pBETA_c = pBETA_c/2;
 pPhi_c   = pwelch(phi_c,omega,[],N,fs);
 pPhi_c = pPhi_c/2;
@@ -66,7 +66,7 @@ pPbv_c   = pwelch(pbV_c,omega,[],N,fs);
 pPbv_c = pPbv_c/2;
 pRbv_c     = pwelch(rbV_c,omega,[],N,fs);
 pRbv_c = pRbv_c/2;
-pay_c = pwelch(a_y,omega,[],2,fs);
+pay_c = pwelch(a_y,omega,[],N,fs);
 pay_c = pay_c/2;
 pBETA_r  = pwelch(beta_r,omega,[],N,fs);
 pBETA_r = pBETA_r/2;
@@ -106,9 +106,9 @@ axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_r_r_r')
 legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 
 figure(4)
-% loglog(w,Sxx(:,5),'k',omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1));
-% axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a')
-% legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+loglog(w,Sxx(:,5),'k',omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1));
+axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a')
+legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
 % subplot(2,1,2); 
 % (loglog(w,Sxx_r(:,3),'k',omega,ay_psd_r(1:N/2),'-',omega(1:8193),pay_c));
 % axis(10.^[-1 2 -10 4]); xlabel('omega [rad/s]'); ylabel('ay_r PSD')
