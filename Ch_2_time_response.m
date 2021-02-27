@@ -1,4 +1,4 @@
-dt = 0.005; T  = 60; 
+dt = 0.005; T  = 100; 
 t = [0:dt:T]; N = length(t);
 nn = zeros(1,N);
 
@@ -45,40 +45,40 @@ a_y_r = V*(ytr(:,1)+(2*V/b) *xtr(:,2));
 % PLOT RESULTS
 figure(1)
 subplot(2,1,1);
-plot(t,yt(:,1),'g','LineWidth',1)
+plot(t,yt(:,1),'g')
 xlabel('Time (s) ')
 ylabel('\beta_c (rad/s)')
 grid on
 subplot(2,1,2); 
-plot(t,ytr(:,1),'b','LineWidth',1)
+plot(t,ytr(:,1),'b')
 xlabel('Time (s)')
 ylabel('\beta_r (rad/s')
 grid on
 
 figure(2)
 subplot(2,1,1);
-plot(t,yt(:,4),'g','LineWidth',1)
+plot(t,yt(:,4),'g')
 xlabel('Time (s) ')
 ylabel('rb/2V_c (rad/s)')
 grid on
 subplot(2,1,2); 
-plot(t,ytr(:,2),'b','LineWidth',1)
+plot(t,ytr(:,2),'b')
 xlabel('Time (s)')
 ylabel('rb/2V_r (rad/s)')
 grid on
 figure(3)
 subplot(2,1,1);
-plot(t,yt(:,2),'g','LineWidth',1)
+plot(t,yt(:,2),'g')
 xlabel('Time (s) ')
 ylabel('\phi (rad/s)')
 grid on
 subplot(2,1,2); 
-plot(t,yt(:,3),'b','LineWidth',1)
+plot(t,yt(:,3),'b')
 xlabel('Time (s)')
 ylabel('pb/2V (rad/s)')
 grid on
 figure(4)
-plot(t,a_y,'g','LineWidth',1)
+plot(t,a_y,'g')
 xlabel('Time (s) ')
 ylabel('a_y_c (m/s)')
 grid on
@@ -89,12 +89,12 @@ grid on
 % grid on
 figure(5)
 subplot(2,1,1);
-plot(t,yt,'g','LineWidth',1)
+plot(t,yt,'g')
 xlabel('Time (s) ')
 ylabel('y_c')
 grid on
 subplot(2,1,2); 
-plot(t,ytr,'b','LineWidth',1)
+plot(t,ytr,'b')
 xlabel('Time (s)')
 ylabel('y_r ')
 grid on
