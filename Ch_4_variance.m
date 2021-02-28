@@ -29,12 +29,12 @@ W = eye(2,2);
 B=B(:,4:5);
 L   = lyap(A2,B*W*B');
 L   = L(1:4,1:4);
-var_L = diag(L)'
+var_L = diag(L)';
 
 %Reduced model
-Br=Br(:,4:5);
-Lr   = lyap(Ar,Br*W*Br');
-Lr   = Lr(1:2,1:2);
-var_L_r = diag(Lr)'
+%Br=Br(:,4:5);
+% Lr   = lyap(Ar,Br*W*Br');
+% Lr   = Lr(1:2,1:2);
+% var_L_r = diag(Lr)'
 
 
