@@ -32,7 +32,7 @@ D = [0 0 0 0 0;
 % RESPONSE to all together (linear system!)
 yt = y1+y2+y3;
 xt = x1+x2+x3;
-a_y =  V*(xt(:,1) + (2*V/b)*yt(:,4));
+a_y =  V*(xt(:,1) + (2*V/b)*xt(:,4));
  
 [y1r,t,x1r] = lsim(sys_reduced,u1,t);
 % RESPONSE to v_g
@@ -41,7 +41,7 @@ a_y =  V*(xt(:,1) + (2*V/b)*yt(:,4));
 [y3r,t,x3r] = lsim(sys_reduced,u3,t);
 ytr = y1r+y2r+y3r;
 xtr = x1r+x2r+x3r;
-a_y_r = V*(ytr(:,1)+(2*V/b) *xtr(:,2));
+
 % PLOT RESULTS
 figure(1)
 subplot(2,1,1);

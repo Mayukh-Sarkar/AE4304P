@@ -11,30 +11,32 @@ var__beta_r = sum(Sxx_r(:,1)'.*dw)/pi
 var__rbv_r = sum(Sxx_r(:,2)'.*dw)/pi
 %var__ay_r = sum(Sxx_r(:,3)'.*dw)/pi
 %% var.m
-vbeta_c  = var(yt(:,1))
-vphi_c  = var(yt(:,2))
-vpbv_c  = var(yt(:,3))
-vrbv_c  = var(yt(:,4))
+vbeta_c  = var(yt1(:,1))
+vphi_c  = var(yt1(:,2))
+vpbv_c  = var(yt1(:,3))
+vrbv_c  = var(yt1(:,4))
 vay_c  = var(a_y)
 %Reduced model
-vbeta_r  = var(ytr(:,1))
-vrbv_r  = var(ytr(:,2))
+vbeta_r  = var(ytr1(:,1))
+vrbv_r  = var(ytr1(:,2))
 %vay_r  = var(a_y_r)
     
 %% lyapunov
 
 
 W = eye(2,2);
+W = eye(2,2);
 %Full Model
-B=B(:,4:5);
-L   = lyap(A2,B*W*B');
+Bl=B(:,4:5);
+L   = lyap(A2,Bl*W*Bl');
 L   = L(1:4,1:4);
-var_L = diag(L)';
+var_L = diag(L)'
 
 %Reduced model
-%Br=Br(:,4:5);
-% Lr   = lyap(Ar,Br*W*Br');
-% Lr   = Lr(1:2,1:2);
-% var_L_r = diag(Lr)'
+Bl1=Br(:,4:5);
+Lr   = lyap(Ar,Bl1*W*Bl1');
+Lr   = Lr(1:2,1:2);
+var_L_r = diag(Lr)';
+
 
 
