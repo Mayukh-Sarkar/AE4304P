@@ -1,0 +1,6 @@
+clc
+clear
+Ch_1_Stability_analysis
+Ch_2_time_response
+Ch_3_spectral_analysis
+Ch_4_variance

@@ -18,8 +18,8 @@ temp = bode(Ar,Br,Cr(2,:),Dr(2,:),4,w)+ bode(Ar,Br,Cr(2,:),Dr(2,:),5,w); Srb_r  
 Sxx_r = [Sbeta_r,Srb_r];
 u = [nn' nn' nn'  w_g'  v_g'];
 
-yt1 = lsim(A2,B,C,D,u,t);
-ytr1= lsim(sys_reduced,u,t);
+yt1 = lsim(A2,B,C1,D,u,t);
+ytr1= lsim(Ar,Br,Cr,Dr,u,t);
 
 
 beta_c = yt1(:,1);

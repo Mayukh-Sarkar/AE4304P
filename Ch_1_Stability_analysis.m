@@ -162,4 +162,3 @@ sys_controlled = ss(A2,B,C,D);
 figure(3)
 pzmap(sys_controlled)
 grid on
-
