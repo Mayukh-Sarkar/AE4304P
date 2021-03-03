@@ -18,9 +18,9 @@ temp = bode(Ar,Br,Cr(2,:),Dr(2,:),4,w)+ bode(Ar,Br,Cr(2,:),Dr(2,:),5,w); Srb_r  
 Sxx_r = [Sbeta_r,Srb_r];
 u = [nn' nn' nn'  w_g'  v_g'];
 
-[yt1,t,xt1] = lsim(sys_controlled,u,t);
-[ytr1,t,xtr1] = lsim(sys_reduced,u,t);
-a_y =  V*(xt1(:,1) + (2*V/b)*xt1(:,4));
+yt1 = lsim(A2,B,C,D,u,t);
+ytr1= lsim(sys_reduced,u,t);
+
 
 beta_c = yt1(:,1);
 phi_c = yt1(:,2);
@@ -82,7 +82,7 @@ pRbv_r = pRbv_r/2;
 % ppbv_psd_c     = (    pPbv_c.*conj(pPbv_c));
 % prbv_psd_c= (    pRbv_c.*conj(pRbv_c));
 % pay_psd_c = (    pay_c.*conj(pay_c));
-figure(1)
+figure(9)
 subplot(2,1,1); loglog(w,Sxx(:,1),'k',omega,beta_psd_c (1:N/2),'-',omega,pBETA_c(2:N/2+1)) 
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_\beta_\beta_c[rad^2/rad/s]');
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
@@ -90,7 +90,7 @@ subplot(2,1,2); loglog(w,Sxx_r(:,1),'k',omega,beta_psd_r(1:N/2),'-',omega,pBETA_
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_\beta_\beta_r[rad^2/rad/s] ')
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
 
-figure(2)
+figure(10)
 subplot(2,1,1); loglog(w,Sxx(:,2),'k',omega,phi_psd_c(1:N/2),'-',omega,pPhi_c(2:N/2+1));
 axis(10.^[-1 2 -12 0]); xlabel('omega [rad/s]'); ylabel('S_\phi_\phi_c [rad^2/rad/s]')
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
@@ -98,7 +98,7 @@ subplot(2,1,2); loglog(w,Sxx(:,3),'k',omega,pbv_psd_c(1:N/2),'-',omega,pPbv_c(2:
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_p_p [rad^2/rad/s]')
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
 
-figure(3)
+figure(11)
 subplot(2,1,1)
 loglog(w,Sxx(:,4),'k',omega,rbv_psd_c(1:N/2),'-',omega,pRbv_c(2:N/2+1));
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_r_r_c [rad^2/rad/s]')
@@ -107,7 +107,7 @@ subplot(2,1,2); loglog(w,Sxx_r(:,2),'k',omega,rbv_psd_r(1:N/2),'-',omega,pRbv_r(
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_r_r_r [rad^2/rad/s]')
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
 
-figure(4)
+figure(12)
 loglog(w,Sxx(:,5),'k',omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1));
 axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
