@@ -13,9 +13,9 @@ Sxx  = [Sbeta_c Sphi_c Sbp_c Srb_c Say_c];
 %reduced model
 temp = bode(Ar,Br,Cr(1,:),Dr(1,:),4,w) + bode(Ar,Br,Cr(1,:),Dr(1,:),5,w); Sbeta_r  = temp.*temp;
 temp = bode(Ar,Br,Cr(2,:),Dr(2,:),4,w)+ bode(Ar,Br,Cr(2,:),Dr(2,:),5,w); Srb_r    = temp.*temp;
+temp = bode(Ar,Br,V*(Ar(1,:)+[0 2*V/b 0    0    0    0    0  0]),V*Br(1,:),4,w) + bode(Ar,Br,V*(Ar(1,:)+[0 2*V/b 0    0    0    0    0  0]),V*Br(1,:),5,w);Say_r = temp.*temp;
 
-
-Sxx_r = [Sbeta_r,Srb_r];
+Sxx_r = [Sbeta_r Srb_r Say_r];
 u = [nn' nn' nn'  w_g'  v_g'];
 
 yt1 = lsim(A2,B,C1,D,u,t);
@@ -48,11 +48,11 @@ ay_psd_c = (1/T)*(    ay_c.*conj(ay_c));
 %reduced model
 BETA_r  = dt*fft(beta_r);
 Rbv_r     = dt*fft(rbV_r);
-%ay_r = dt*fft(a_y_r);
+ay_r = dt*fft(a_y_r);
 
 beta_psd_r  = (1/T)*( BETA_r.*conj(BETA_r));
 rbv_psd_r= (1/T)*(    Rbv_r.*conj(Rbv_r));
-%ay_psd_r = (1/T)*(    ay_r.*conj(ay_r));
+ay_psd_r = (1/T)*(    ay_r.*conj(ay_r));
 
 
 % DEFINE FREQUENCY VECT
@@ -74,7 +74,8 @@ pBETA_r  = pwelch(beta_r,omega,[],N,fs);
 pBETA_r = pBETA_r/2;
 pRbv_r     = pwelch(rbV_r,omega,[],N,fs);
 pRbv_r = pRbv_r/2;
-%pay_r = pwelch(a_y_r);
+pay_r = pwelch(a_y_r,omega,[],N,fs);
+pay_r = pay_r/2;
 
  %PSD ESTIMATE
 % pbeta_psd_c  = ( pBETA_c.*conj(pBETA_c));
@@ -112,6 +113,17 @@ loglog(w,Sxx(:,5),'k',omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1));
 axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
 legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
 % subplot(2,1,2); 
-% (loglog(w,Sxx_r(:,3),'k',omega,ay_psd_r(1:N/2),'-',omega(1:8193),pay_c));
-% axis(10.^[-1 2 -10 4]); xlabel('omega [rad/s]'); ylabel('ay_r PSD')
-% legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
+% loglog(w,Sxx_r(:,3),'k',omega,ay_psd_r(1:N/2),'-',omega,pay_r(2:N/2+1));
+% axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
+% legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
+figure(13) % for beta comptete model
+bode(A2,B,C(1,:),D(1,:),4,w)
+hold on
+bode(A2,B,C(1,:),D(1,:),5,w)
+legend('lateral turbulence','vertical turbulence')
+% for rb/2v full model
+figure(14)
+bode(A2,B,C(4,:),D(4,:),4,w)
+hold on
+bode(A2,B,C(4,:),D(4,:),5,w)
+legend('lateral turbulence','vertical turbulence')

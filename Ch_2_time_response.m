@@ -43,6 +43,8 @@ y2r = lsim(sys_reduced,u2,t);
 % RESPONSE to w_g
 y3r = lsim(sys_reduced,u3,t);
 ytr = y1r+y2r+y3r;
+a_y_r = V*(Ar(1,:)*ytr' +Br(1,:)*u1' + Br(1,:)*u2' + Br(1,:)*u3'+ (2*V/b)*ytr(:,2)');
+
 % PLOT RESULTS
 figure(4)
 subplot(2,1,1);
@@ -79,15 +81,16 @@ xlabel('Time (s)')
 ylabel('pb/2V (rad/s)')
 grid on
 figure(7)
+subplot(2,1,1)
 plot(t,a_y,'g')
 xlabel('Time (s) ')
 ylabel('a_y_c (m/s)')
 grid on
-% subplot(2,1,2); 
-% plot(t,a_y_r,'b','LineWidth',1)
-% xlabel('Time (s)')
-% ylabel('a_y_r (m/s)')
-% grid on
+subplot(2,1,2); 
+plot(t,a_y_r,'b','LineWidth',1)
+xlabel('Time (s)')
+ylabel('a_y_r (m/s)')
+grid on
 figure(8)
 subplot(2,1,1);
 plot(t,yt,'g')
