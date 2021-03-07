@@ -1,4 +1,4 @@
-dt = 0.005; T  = 100; 
+dt = 0.005; T  = 1000; 
 t = [0:dt:T]; N = length(t);
 nn = zeros(1,N);
 
@@ -37,11 +37,11 @@ yt = y1+y2+y3;
 %xt = x1+x2+x3;
 a_y =  yt(:,5);
  
-y1r = lsim(sys_reduced,u1,t);
+y1r = lsim(Ar,Br,Cr,Dr,u1,t);
 % RESPONSE to v_g
-y2r = lsim(sys_reduced,u2,t);
+y2r = lsim(Ar,Br,Cr,Dr,u2,t);
 % RESPONSE to w_g
-y3r = lsim(sys_reduced,u3,t);
+y3r = lsim(Ar,Br,Cr,Dr,u3,t);
 ytr = y1r+y2r+y3r;
 a_y_r = V*(Ar(1,:)*ytr' +Br(1,:)*u1' + Br(1,:)*u2' + Br(1,:)*u3'+ (2*V/b)*ytr(:,2)');
 

@@ -84,34 +84,41 @@ pay_r = pay_r/2;
 % prbv_psd_c= (    pRbv_c.*conj(pRbv_c));
 % pay_psd_c = (    pay_c.*conj(pay_c));
 figure(9)
-subplot(2,1,1); loglog(w,Sxx(:,1),'k',omega,beta_psd_c (1:N/2),'-',omega,pBETA_c(2:N/2+1)) 
+subplot(2,1,1); loglog(omega,beta_psd_c (1:N/2),'-',omega,pBETA_c(2:N/2+1),w,Sxx(:,1),'k') 
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_\beta_\beta_c[rad^2/rad/s]');
-legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
-subplot(2,1,2); loglog(w,Sxx_r(:,1),'k',omega,beta_psd_r(1:N/2),'-',omega,pBETA_r(2:N/2+1))
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
+subplot(2,1,2); loglog(omega,beta_psd_r(1:N/2),'-',omega,pBETA_r(2:N/2+1),w,Sxx_r(:,1),'k')
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_\beta_\beta_r[rad^2/rad/s] ')
-legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
 
 figure(10)
-subplot(2,1,1); loglog(w,Sxx(:,2),'k',omega,phi_psd_c(1:N/2),'-',omega,pPhi_c(2:N/2+1));
+subplot(2,1,1); loglog(omega,phi_psd_c(1:N/2),'-',omega,pPhi_c(2:N/2+1),w,Sxx(:,2),'k');
 axis(10.^[-1 2 -12 0]); xlabel('omega [rad/s]'); ylabel('S_\phi_\phi_c [rad^2/rad/s]')
-legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
-subplot(2,1,2); loglog(w,Sxx(:,3),'k',omega,pbv_psd_c(1:N/2),'-',omega,pPbv_c(2:N/2+1));
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
+subplot(2,1,2); loglog(omega,pbv_psd_c(1:N/2),'-',omega,pPbv_c(2:N/2+1),w,Sxx(:,3),'k');
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_p_p [rad^2/rad/s]')
-legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
 
 figure(11)
 subplot(2,1,1)
-loglog(w,Sxx(:,4),'k',omega,rbv_psd_c(1:N/2),'-',omega,pRbv_c(2:N/2+1));
+loglog(omega,rbv_psd_c(1:N/2),'-',omega,pRbv_c(2:N/2+1),w,Sxx(:,4),'k');
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_r_r_c [rad^2/rad/s]')
-legend('Analytical PSD', 'Periodogram','Smoothed Periodogram')
-subplot(2,1,2); loglog(w,Sxx_r(:,2),'k',omega,rbv_psd_r(1:N/2),'-',omega,pRbv_r(2:N/2+1));
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
+subplot(2,1,2); loglog(omega,rbv_psd_r(1:N/2),'-',omega,pRbv_r(2:N/2+1),w,Sxx_r(:,2),'k');
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_r_r_r [rad^2/rad/s]')
-legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
 
 figure(12)
-loglog(w,Sxx(:,5),'k',omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1));
+loglog(omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1),w,Sxx(:,5),'k');
 axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
-legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
 % subplot(2,1,2); 
 % loglog(w,Sxx_r(:,3),'k',omega,ay_psd_r(1:N/2),'-',omega,pay_r(2:N/2+1));
 % axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
