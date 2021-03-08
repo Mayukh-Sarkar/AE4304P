@@ -18,17 +18,19 @@
 % effective one-dimensional power spectral densities for u_g, alpha_g and
 % beta_g.
 % 
-% Data for Cessna Citation Ce-500, landing (1)
+% Deig
 
 % AIRCRAFT- AND FLIGHT CONDITION 'cruise'.
 V   = 121.3;
+W = 53361;
+rho = 0.4587;
 S   = 24.2;
 b   = 13.36;
 mub = 32;
 KX2 = 0.013;
 KZ2 = 0.037;
 KXZ = 0.002;
-CL  = 1.1360;
+CL  = W/(0.5*rho*V^2*S);
 
 % TURBULENCE PARAMETERS APPROXIMATED POWER SPECTRAL DENSITIES
 Lg        = 150; 
@@ -46,7 +48,7 @@ tau4 = 0.0600;     tau5 = 0.3294;     tau6 = 0.2243;
 
 % AIRCRAFT ASYMMETRIC AERODYNAMIC DERIVATIVES 
 CYb  =-1.3250;     Clb  =-0.1070;     Cnb  = 0.1835;
-CYp  =-0.1320;     Clp  =-0.3684;     Cnp  =-0.0035;
+CYp  =-0.1320;     Clp  =-0.3684;     Cnp  =0.0035;
 CYr  = 0.4300;     Clr  = 0.1750;     Cnr  =-0.1930;
 CYda = 0.0000;     Clda =-0.2292;     Cnda = 0.0071;
 CYdr = 0.3037;     Cldr = 0.0446;     Cndr =-0.1261;
@@ -129,17 +131,17 @@ figure(1)
 pzmap(sys_uncontrolled)
 grid on
 
-Ar = [0   -2*V/b 0    0    0    0    0  0;
-     nb    nr nug  0    nag  0    nbg  0;
-     0     0  0    1    0    0    0    0;
-     0     0  aug1 aug2 0    0    0    0;
-     0     0  0    0    0    1    0    0;
-     0     0  0    0    aag1 aag2 0    0;
-     0     0  0    0    0    0    0    1;
-     0     0  0    0    0    0    abg1 abg2];
+Ar = [yb     yr 0    0    0    0    ybg  0;
+     nb     nr nug  0    nag  0    nbg  0;
+     0       0  0    1    0    0    0    0;
+     0       0  aug1 aug2 0    0    0    0;
+     0       0  0    0    0    1    0    0;
+     0       0  0    0    aag1 aag2 0    0;
+     0       0  0    0    0    0    0    1;
+     0       0  0    0    0    0    abg1 abg2];
 
-Br = [0  0   0    0    0;
-     0   0   0    0    0;
+Br = [0   ydr 0    0    0;
+     nda ndr 0    0    0;
      0   0   bug1 0    0;
      0   0   bug2 0    0;
      0   0   0    bag1 0;

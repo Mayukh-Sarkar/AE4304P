@@ -6,14 +6,14 @@ temp = bode(A2,B,C(1,:),D(1,:),4,w)+ bode(A2,B,C(1,:),D(1,:),5,w); Sbeta_c  = te
 temp = bode(A2,B,C(2,:),D(2,:),4,w)+ bode(A2,B,C(2,:),D(2,:),5,w); Sphi_c   = temp.*temp;
 temp = bode(A2,B,C(3,:),D(3,:),4,w)+ bode(A2,B,C(3,:),D(3,:),5,w); Sbp_c    = temp.*temp;
 temp = bode(A2,B,C(4,:),D(4,:),4,w)+ bode(A2,B,C(4,:),D(4,:),5,w); Srb_c    = temp.*temp;
-temp = bode(A2,B,V*(A2(1,:)+[0 0 0 2*V/b 0    0    0    0    0  0]),V*B(1,:),4,w)+ bode(A2,B,V*(A2(1,:)+[0 0 0 2*V/b 0    0    0    0    0  0]),V*B(1,:),5,w); Say_c = temp.*temp;
+temp = bode(A2,B,C1(5,:),D(5,:),4,w)+ bode(A2,B,C1(5,:),D(5,:),5,w); Say_c = temp.*temp;
 
 Sxx  = [Sbeta_c Sphi_c Sbp_c Srb_c Say_c];
 
 %reduced model
-temp = bode(Ar,Br,Cr(1,:),Dr(1,:),4,w) + bode(Ar,Br,Cr(1,:),Dr(1,:),5,w); Sbeta_r  = temp.*temp;
-temp = bode(Ar,Br,Cr(2,:),Dr(2,:),4,w)+ bode(Ar,Br,Cr(2,:),Dr(2,:),5,w); Srb_r    = temp.*temp;
-temp = bode(Ar,Br,V*(Ar(1,:)+[0 2*V/b 0    0    0    0    0  0]),V*Br(1,:),4,w) + bode(Ar,Br,V*(Ar(1,:)+[0 2*V/b 0    0    0    0    0  0]),V*Br(1,:),5,w);Say_r = temp.*temp;
+temp = bode(Ar,Br,Cr1(1,:),Dr(1,:),4,w) + bode(Ar,Br,Cr1(1,:),Dr(1,:),5,w); Sbeta_r  = temp.*temp;
+temp = bode(Ar,Br,Cr1(2,:),Dr(2,:),4,w)+ bode(Ar,Br,Cr1(2,:),Dr(2,:),5,w); Srb_r    = temp.*temp;
+temp = bode(Ar,Br,Cr1(3,:),D(3,:),4,w) + bode(Ar,Br,Cr1(3,:),D(3,:),5,w);Say_r = temp.*temp;
 
 Sxx_r = [Sbeta_r Srb_r Say_r];
 u = [nn' nn' nn'  w_g'  v_g'];
@@ -78,11 +78,6 @@ pay_r = pwelch(a_y_r,omega,[],N,fs);
 pay_r = pay_r/2;
 
  %PSD ESTIMATE
-% pbeta_psd_c  = ( pBETA_c.*conj(pBETA_c));
-% pphi_psd_c  = (  pPhi_c.*conj(pPhi_c));
-% ppbv_psd_c     = (    pPbv_c.*conj(pPbv_c));
-% prbv_psd_c= (    pRbv_c.*conj(pRbv_c));
-% pay_psd_c = (    pay_c.*conj(pay_c));
 figure(9)
 subplot(2,1,1); loglog(omega,beta_psd_c (1:N/2),'-',omega,pBETA_c(2:N/2+1),w,Sxx(:,1),'k') 
 axis(10.^[-1 2 -12 -2]); xlabel('omega [rad/s]'); ylabel('S_\beta_\beta_c[rad^2/rad/s]');
@@ -115,14 +110,16 @@ legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
 grid on
 
 figure(12)
+subplot(2,1,1)
 loglog(omega,ay_psd_c(1:N/2),'-',omega,pay_c(2:N/2+1),w,Sxx(:,5),'k');
 axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
 legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
 grid on
-% subplot(2,1,2); 
-% loglog(w,Sxx_r(:,3),'k',omega,ay_psd_r(1:N/2),'-',omega,pay_r(2:N/2+1));
-% axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
-% legend('Analytical PSD', 'Experimental Periodogram','Smoothed Periodogram')
+subplot(2,1,2); 
+loglog(omega,ay_psd_r(1:N/2),'-',omega,pay_r(2:N/2+1),w,Sxx_r(:,3),'k');
+axis(10.^[-1 2 -10 5]); xlabel('omega [rad/s]'); ylabel('S_a_a [(m/s^2)^2/rad/s]')
+legend('Experimental Periodogram','Smoothed Periodogram','Analytical PSD')
+grid on
 figure(13) % for beta comptete model
 bode(A2,B,C(1,:),D(1,:),4,w)
 hold on

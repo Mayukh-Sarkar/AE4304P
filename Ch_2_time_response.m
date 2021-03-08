@@ -1,4 +1,4 @@
-dt = 0.005; T  = 1000; 
+dt = 0.005; T  = 600; 
 t = [0:dt:T]; N = length(t);
 nn = zeros(1,N);
 
@@ -26,6 +26,12 @@ D = [0 0 0 0 0;
      0 0 0 0 0;
      0 0 0 0 0];
 
+Cr1= [1 0 0 0 0 0 0 0;
+      0 1 0 0 0 0 0 0;
+      V*yb  V*(yr+(2*V/b)) 0 0 0 0 V*ybg 0];
+Dr1 = [0 0 0 0 0;
+     0 0 0 0 0;
+     0 0 0 0 0];
 % RESPONSE to u_g
 y1 = lsim(A2,B,C1,D,u1,t);
 % RESPONSE to v_g
@@ -37,13 +43,13 @@ yt = y1+y2+y3;
 %xt = x1+x2+x3;
 a_y =  yt(:,5);
  
-y1r = lsim(Ar,Br,Cr,Dr,u1,t);
+y1r = lsim(Ar,Br,Cr1,Dr1,u1,t);
 % RESPONSE to v_g
-y2r = lsim(Ar,Br,Cr,Dr,u2,t);
+y2r = lsim(Ar,Br,Cr1,Dr1,u2,t);
 % RESPONSE to w_g
-y3r = lsim(Ar,Br,Cr,Dr,u3,t);
+y3r = lsim(Ar,Br,Cr1,Dr1,u3,t);
 ytr = y1r+y2r+y3r;
-a_y_r = V*(Ar(1,:)*ytr' +Br(1,:)*u1' + Br(1,:)*u2' + Br(1,:)*u3'+ (2*V/b)*ytr(:,2)');
+a_y_r = ytr(:,3);
 
 % PLOT RESULTS
 figure(4)
