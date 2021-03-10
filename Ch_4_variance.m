@@ -33,8 +33,8 @@ var_r = [vbeta_r vrbv_r vay_r]
 W = eye(2,2)
 
 %Full Model
-Bl=B(:,4:5);
-L1   = lyap(A2,Bl*W*Bl');
+B_f=B(:,4:5);
+L1   = lyap(A2,B_f*W*B_f');
 L   = L1(1:4,1:4);
 var_L = diag(L)';
 
@@ -43,8 +43,8 @@ lya = [var_L(1) var_L(2) var_L(3) var_L(4) var_ay ];
 
 Full_var = [ana' var_f' lya']
 %Reduced model
-Bl1=Br(:,4:5);
-Lr   = lyap(Ar,Bl1*W*Bl1');
+B_r=Br(:,4:5);
+Lr   = lyap(Ar,B_r*W*B_r');
 Lr1   = Lr(1:2,1:2);
 var_L_r = diag(Lr1)';
 var_ay_r = Cr1(3,:)*Lr*Cr1(3,:)'
