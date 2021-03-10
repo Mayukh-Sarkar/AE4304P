@@ -21,23 +21,23 @@
 % Deig
 
 % AIRCRAFT- AND FLIGHT CONDITION 'cruise'.
-V   = 121.3;
-W = 53361;
-rho = 0.4587;
-S   = 24.2;
-b   = 13.36;
-mub = 32;
-KX2 = 0.013;
-KZ2 = 0.037;
-KXZ = 0.002;
-CL  = W/(0.5*rho*V^2*S);
+V   = 121.3; %check
+W = 53361; %check
+rho = 0.4587;%check
+S   = 24.2;%check
+b   = 13.36;%check
+mub = 32;%check
+KX2 = 0.013; %check
+KZ2 = 0.037; %check
+KXZ = 0.002; %check
+CL  = W/(0.5*rho*V^2*S); %check
 
 % TURBULENCE PARAMETERS APPROXIMATED POWER SPECTRAL DENSITIES
-Lg        = 150; 
+Lg        = 150; %check
 B         = b/(2*Lg);
-sigma     = 2;
+sigma     = 2; %check
 sigmaug_V = sigma/V;
-sigmavg   = 1;
+sigmavg   = 1; %check
 sigmabg   = sigmavg/V;
 sigmaag   = sigma/V;
 

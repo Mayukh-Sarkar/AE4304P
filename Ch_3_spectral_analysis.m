@@ -2,10 +2,10 @@
 w = logspace(-2,2,300);
 %% analystical
 % controlled model
-temp = bode(A2,B,C(1,:),D(1,:),4,w)+ bode(A2,B,C(1,:),D(1,:),5,w); Sbeta_c  = temp.*temp;
-temp = bode(A2,B,C(2,:),D(2,:),4,w)+ bode(A2,B,C(2,:),D(2,:),5,w); Sphi_c   = temp.*temp;
-temp = bode(A2,B,C(3,:),D(3,:),4,w)+ bode(A2,B,C(3,:),D(3,:),5,w); Sbp_c    = temp.*temp;
-temp = bode(A2,B,C(4,:),D(4,:),4,w)+ bode(A2,B,C(4,:),D(4,:),5,w); Srb_c    = temp.*temp;
+temp = bode(A2,B,C1(1,:),D(1,:),4,w)+ bode(A2,B,C1(1,:),D(1,:),5,w); Sbeta_c  = temp.*temp;
+temp = bode(A2,B,C1(2,:),D(2,:),4,w)+ bode(A2,B,C1(2,:),D(2,:),5,w); Sphi_c   = temp.*temp;
+temp = bode(A2,B,C1(3,:),D(3,:),4,w)+ bode(A2,B,C1(3,:),D(3,:),5,w); Sbp_c    = temp.*temp;
+temp = bode(A2,B,C1(4,:),D(4,:),4,w)+ bode(A2,B,C1(4,:),D(4,:),5,w); Srb_c    = temp.*temp;
 temp = bode(A2,B,C1(5,:),D(5,:),4,w)+ bode(A2,B,C1(5,:),D(5,:),5,w); Say_c = temp.*temp;
 
 Sxx  = [Sbeta_c Sphi_c Sbp_c Srb_c Say_c];

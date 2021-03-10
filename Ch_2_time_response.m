@@ -90,12 +90,12 @@ figure(7)
 subplot(2,1,1)
 plot(t,a_y,'g')
 xlabel('Time (s) ')
-ylabel('a_y_c (m/s)')
+ylabel('a_y_c (m/s^2)')
 grid on
 subplot(2,1,2); 
 plot(t,a_y_r,'b','LineWidth',1)
 xlabel('Time (s)')
-ylabel('a_y_r (m/s)')
+ylabel('a_y_r (m/s^2)')
 grid on
 figure(8)
 subplot(2,1,1);
