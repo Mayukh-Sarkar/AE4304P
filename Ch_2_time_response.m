@@ -1,4 +1,4 @@
-dt = 0.005; T  = 600; 
+dt = 0.005; T  = 100; 
 t = [0:dt:T]; N = length(t);
 nn = zeros(1,N);
 
@@ -93,7 +93,7 @@ xlabel('Time (s) ')
 ylabel('a_y_c (m/s^2)')
 grid on
 subplot(2,1,2); 
-plot(t,a_y_r,'b','LineWidth',1)
+plot(t,a_y_r,'b')
 xlabel('Time (s)')
 ylabel('a_y_r (m/s^2)')
 grid on
