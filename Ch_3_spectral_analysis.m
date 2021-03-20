@@ -32,6 +32,7 @@ beta_r = ytr1(:,1);
 rbV_r= ytr1(:,2);
 % COMPUTE PERIODOGRAM AND ESTIMATE PSD
 %% using fft
+%full  model
 BETA_c  = dt*fft(beta_c);
 Phi_c   = dt*fft(phi_c);
 Pbv_c     = dt*fft(pbV_c);
@@ -59,7 +60,7 @@ ay_psd_r = (1/T)*(    ay_r.*conj(ay_r));
 fs = 1/dt;     % sample frequency
 omega = 2*pi*fs*(0:(N/2)-1)/N;
 %% using pwelch
-
+%full model
 pBETA_c  = pwelch(beta_c,omega,[],N,fs);
 pBETA_c = pBETA_c/2;
 pPhi_c   = pwelch(phi_c,omega,[],N,fs);
@@ -70,6 +71,7 @@ pRbv_c     = pwelch(rbV_c,omega,[],N,fs);
 pRbv_c = pRbv_c/2;
 pay_c = pwelch(a_y,omega,[],N,fs);
 pay_c = pay_c/2;
+%reduced model
 pBETA_r  = pwelch(beta_r,omega,[],N,fs);
 pBETA_r = pBETA_r/2;
 pRbv_r     = pwelch(rbV_r,omega,[],N,fs);

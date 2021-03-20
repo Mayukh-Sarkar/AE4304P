@@ -35,9 +35,9 @@ Dr1 = [0 0 0 0 0;
 % RESPONSE to u_g
 %y1 = lsim(A2,B,C1,D,u1,t);
 % RESPONSE to v_g
-y2 = lsim(A2,B,C1,D,u2,t);
+y2 = lsim(A2,B,C1,D,u2,t); %lateral gust
 % RESPONSE to w_g
-y3 = lsim(A2,B,C1,D,u3,t);
+y3 = lsim(A2,B,C1,D,u3,t); %vertical gust
 % RESPONSE to all together (linear system!)
 yt = y2+y3;
 %xt = x1+x2+x3;
